@@ -1,9 +1,9 @@
-import { buffer } from "micro";
 import Stripe from "stripe";
+import { buffer } from "micro";
 
 export const config = {
   api: {
-    bodyParser: false, // ❗ required for webhooks
+    bodyParser: false,
   },
 };
 
@@ -11,7 +11,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).send("Method not allowed");
+    return res.status(405).send("Method Not Allowed");
   }
 
   const sig = req.headers["stripe-signature"];
@@ -19,29 +19,22 @@ export default async function handler(req, res) {
   let event;
 
   try {
-    const buf = await buffer(req);
+    const rawBody = await buffer(req);
     event = stripe.webhooks.constructEvent(
-      buf,
+      rawBody,
       sig,
-      process.env.STRIPE_WEBHOOK_SECRET // we'll add this later
+      process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (err) {
-    console.error("Webhook signature failed:", err.message);
+    console.error("Webhook signature verification failed:", err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  // handle successful payment
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
-
-    console.log("Payment verified:", session.id);
-
-    // TODO:
-    // grant course access
-    // store payment in DB
-    // send email confirmation
-
+    console.log("Payment complete:", session);
   }
 
-  res.json({ received: true });
+  res.status(200).json({ received: true });
 }
+
