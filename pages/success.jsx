@@ -14,7 +14,7 @@ export default function Success() {
           href="/blueprint"
           className="underline text-pink-400 hover:text-pink-300"
         >
-          Go to your course dashboard →
+          Back to modules →
         </a>
       </div>
     </main>

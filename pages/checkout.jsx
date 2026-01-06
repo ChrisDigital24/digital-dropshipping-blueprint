@@ -4,23 +4,39 @@ import { useState } from "react";
 
 export default function Checkout() {
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
 
   async function handleCheckout() {
+    if (!email.trim()) {
+      alert("Please enter your email to continue.");
+      return;
+    }
+
     setLoading(true);
 
     try {
       const res = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ price: 297 }), // optional
+        // ✅ send email so webhook can grant access + send login link
+        body: JSON.stringify({ email: email.trim() }),
       });
 
-      const { url } = await res.json();
-      window.location.href = url; // send user to Stripe
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to create checkout session");
+      }
+
+      if (!data?.url) {
+        throw new Error("Stripe URL missing from response");
+      }
+
+      window.location.href = data.url; // send user to Stripe
     } catch (err) {
       console.error(err);
+      alert(err.message || "Something went wrong redirecting to checkout.");
       setLoading(false);
-      alert("Something went wrong redirecting to checkout.");
     }
   }
 
@@ -90,6 +106,25 @@ export default function Checkout() {
 
             <div className="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-8">
               <h2 className="text-2xl font-semibold">Payment Details</h2>
+
+              {/* ✅ Email input (required for access delivery) */}
+              <div className="mt-6">
+                <label className="block text-sm text-neutral-400 mb-2">
+                  Email for access + receipts
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  className="w-full rounded-full px-4 py-3 bg-black border border-neutral-700 text-white focus:border-pink-500 outline-none"
+                  autoComplete="email"
+                  inputMode="email"
+                />
+                <p className="mt-2 text-xs text-neutral-500">
+                  We’ll use this email to send your login link and course access.
+                </p>
+              </div>
 
               <button
                 onClick={handleCheckout}
