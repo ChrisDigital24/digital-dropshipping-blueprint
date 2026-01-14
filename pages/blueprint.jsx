@@ -97,8 +97,8 @@ export default function Blueprint() {
               {
                 module: "Bonuses",
                 lessons: [
-                  "1-on-1 Coaching Call",
-                  "Step-by-step roadmap",
+                  "Step-By-Step High-Converting Store Creation",
+                  "7-Figure Offer Formula",
                   "30 plug-and-play video hooks",
                 ],
               },
