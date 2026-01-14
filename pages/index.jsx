@@ -271,13 +271,13 @@ className="reveal px-6 py-24 max-w-6xl mx-auto text-center">
 
             <div className="bg-neutral-900/70 border border-neutral-800 rounded-2xl">
               <div className="p-8">
-                <h3 className="text-2xl font-semibold">Private DFY Build - Invite Only</h3>
+                <h3 className="text-2xl font-semibold">Private DFY Build</h3>
                 <p className="mt-4 text-neutral-400">
                   A service for students who want their store built, launched and optimized for them.
                 </p>
                 <p className="mt-6 text-3xl font-bold">$1,497</p>
                 <Button variant="secondary" className="mt-6 w-full">
-                  Applications Opening Soon
+                  Opening Soon
                 </Button>
               </div>
             </div>
