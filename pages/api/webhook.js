@@ -98,23 +98,52 @@ export default async function handler(req, res) {
         to: email,
         subject: "Your access to Digital Profit HQ ✅",
         html: `
-          <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-            <h1 style="margin:0 0 12px;">Welcome to Digital Profit HQ 🎉</h1>
-            <p style="margin:0 0 12px;">Your payment was successful, and your course access is ready.</p>
-            <p style="margin:0 0 18px;">
-              Click below to log in and access your dashboard:
-            </p>
-            <p style="margin:0 0 18px;">
-              <a href="${process.env.NEXTAUTH_URL}/dashboard"
-                 style="display:inline-block;background:#ec4899;color:#fff;text-decoration:none;padding:12px 18px;border-radius:999px;font-weight:600;">
-                Go to Dashboard
-              </a>
-            </p>
-            <p style="margin:0;color:#888;font-size:12px;">
-              If the button doesn’t work, copy/paste this link: ${process.env.NEXTAUTH_URL}/dashboard
-            </p>
-          </div>
-        `,
+  <div style="background:#0b0b0b;padding:40px 0;font-family:Arial,sans-serif;">
+    <div style="max-width:520px;margin:0 auto;background:#111;border-radius:16px;padding:32px;color:#ffffff;">
+      
+      <h1 style="margin:0 0 16px;font-size:24px;">
+        Welcome to Digital Profit HQ 🎉
+      </h1>
+
+      <p style="margin:0 0 20px;color:#cfcfcf;font-size:15px;line-height:1.6;">
+        Your payment was successful and your course access is now unlocked.
+      </p>
+
+      <div style="margin:24px 0;text-align:center;">
+        <a
+          href="${process.env.NEXTAUTH_URL}/dashboard"
+          style="
+            display:inline-block;
+            background:linear-gradient(90deg,#d946ef,#ec4899);
+            color:#ffffff;
+            text-decoration:none;
+            padding:14px 22px;
+            border-radius:999px;
+            font-weight:600;
+            font-size:15px;
+          "
+        >
+          Go to Your Dashboard →
+        </a>
+      </div>
+
+      <p style="margin:24px 0 0;color:#a3a3a3;font-size:13px;line-height:1.5;">
+        If the button doesn’t work, copy and paste this link into your browser:
+        <br />
+        <span style="color:#ffffff;">
+          ${process.env.NEXTAUTH_URL}/dashboard
+        </span>
+      </p>
+
+      <hr style="border:none;border-top:1px solid #222;margin:32px 0;" />
+
+      <p style="margin:0;color:#777;font-size:12px;">
+        Need help? Just reply to this email — we read every message.
+      </p>
+
+    </div>
+  </div>
+`,
       });
 
       console.log("✅ Payment verified + access granted for:", email);
