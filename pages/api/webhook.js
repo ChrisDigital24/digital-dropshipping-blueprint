@@ -102,7 +102,7 @@ export default async function handler(req, res) {
     <div style="max-width:520px;margin:0 auto;background:#111;border-radius:16px;padding:32px;color:#ffffff;">
       
       <h1 style="margin:0 0 16px;font-size:24px;">
-        Welcome to Digital Profit HQ 🎉
+        Welcome to Digital Profit HQ!
       </h1>
 
       <p style="margin:0 0 20px;color:#cfcfcf;font-size:15px;line-height:1.6;">
