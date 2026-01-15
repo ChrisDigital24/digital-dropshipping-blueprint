@@ -29,6 +29,8 @@ export default async function handler(req, res) {
         email,
       },
 
+      allow_promotion_codes: true,
+
       payment_method_types: ["card"],
       line_items: [
         {
