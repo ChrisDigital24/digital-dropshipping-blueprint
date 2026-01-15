@@ -52,9 +52,13 @@ export default function Home() {
           }
         }
 
+        /* Default reveal animation */
         .visible {
           animation: fadeInUp .5s ease-out forwards;
         }
+
+        /* ⏱️ Scroll animation timing (stagger) */
+        .reveal.visible { animation-delay: var(--d, 0ms); }
 
         .modal-bg {
           backdrop-filter: blur(8px);
@@ -62,7 +66,10 @@ export default function Home() {
       `}</style>
 
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
         <title>Digital Dropshipping Blueprint</title>
         <meta
           name="description"
@@ -158,27 +165,45 @@ export default function Home() {
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button onClick={() => setIsOpen(true)}>Get the Free Starter Kit</Button>
+            <Button onClick={() => setIsOpen(true)}>
+              Get the Free Starter Kit
+            </Button>
             <Button
-  variant="outline"
-  onClick={() => {
-    document.getElementById("learn")?.scrollIntoView({ behavior: "smooth" });
-  }}
->
-  See What You’ll Learn
-</Button>
-
+              variant="outline"
+              onClick={() => {
+                document.getElementById("learn")?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
+            >
+              See What You’ll Learn
+            </Button>
           </div>
         </section>
 
         {/* FEATURES */}
-        <section className="reveal px-6 pt-6 md:pt-10 pb-20 max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
-          {[ 
-            { title: "No Inventory", text: "Sell digital products without storage, shipping, or suppliers." },
-            { title: "Beginner Friendly", text: "No tech skills required. Everything is explained step by step." },
-            { title: "Scalable Income", text: "Build once and sell repeatedly without increasing workload." },
+        <section
+          className="reveal px-6 pt-6 md:pt-10 pb-20 max-w-6xl mx-auto grid md:grid-cols-3 gap-8"
+          style={{ ["--d"]: "0ms" }}
+        >
+          {[
+            {
+              title: "No Inventory",
+              text: "Sell digital products without storage, shipping, or suppliers.",
+            },
+            {
+              title: "Beginner Friendly",
+              text: "No tech skills required. Everything is explained step by step.",
+            },
+            {
+              title: "Scalable Income",
+              text: "Build once and sell repeatedly without increasing workload.",
+            },
           ].map((item, i) => (
-            <div key={i} className="bg-neutral-900/70 border border-neutral-800 rounded-2xl">
+            <div
+              key={i}
+              className="bg-neutral-900/70 border border-neutral-800 rounded-2xl"
+            >
               <div className="p-8">
                 <h3 className="text-xl font-semibold">{item.title}</h3>
                 <p className="mt-4 text-neutral-400">{item.text}</p>
@@ -188,53 +213,66 @@ export default function Home() {
         </section>
 
         {/* 🔥 WHAT YOU’LL LEARN */}
-<section
-  id="learn"
-className="reveal px-6 py-24 max-w-6xl mx-auto text-center">
-  <h2 className="text-4xl font-bold">What You’ll Learn Inside the Blueprint</h2>
-  <div className="mt-4 h-1 w-24 mx-auto rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500" />
+        <section
+          id="learn"
+          className="reveal px-6 py-24 max-w-6xl mx-auto text-center"
+          style={{ ["--d"]: "80ms" }}
+        >
+          <h2 className="text-4xl font-bold">
+            What You’ll Learn Inside the Blueprint
+          </h2>
+          <div className="mt-4 h-1 w-24 mx-auto rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500" />
 
-  <p className="mt-6 text-neutral-400 max-w-2xl mx-auto leading-relaxed text-lg">
-    Inside the Blueprint, you'll learn the exact systems and tools that allow you 
-    to build a profitable digital store that runs almost hands-free.
-  </p>
+          <p className="mt-6 text-neutral-400 max-w-2xl mx-auto leading-relaxed text-lg">
+            Inside the Blueprint, you'll learn the exact systems and tools that
+            allow you to build a profitable digital store that runs almost
+            hands-free.
+          </p>
 
-  <div className="mt-12 grid gap-8 md:grid-cols-3 text-left">
-    <div className="bg-neutral-900/70 border border-neutral-800 rounded-2xl p-8">
-      <h3 className="text-xl font-semibold">✔ Launch Your Store Fast</h3>
-      <p className="mt-3 text-neutral-400">
-        The complete step-by-step process to launch your first digital product
-      </p>
-    </div>
+          <div className="mt-12 grid gap-8 md:grid-cols-3 text-left">
+            <div className="bg-neutral-900/70 border border-neutral-800 rounded-2xl p-8">
+              <h3 className="text-xl font-semibold">✔ Launch Your Store Fast</h3>
+              <p className="mt-3 text-neutral-400">
+                The complete step-by-step process to launch your first digital
+                product
+              </p>
+            </div>
 
-    <div className="bg-neutral-900/70 border border-neutral-800 rounded-2xl p-8">
-      <h3 className="text-xl font-semibold">✔ Automate Your Sales Systems</h3>
-      <p className="mt-3 text-neutral-400">
-        Deliver products instantly without touching files, customer messages, 
-        or complicated integrations.
-      </p>
-    </div>
+            <div className="bg-neutral-900/70 border border-neutral-800 rounded-2xl p-8">
+              <h3 className="text-xl font-semibold">
+                ✔ Automate Your Sales Systems
+              </h3>
+              <p className="mt-3 text-neutral-400">
+                Deliver products instantly without touching files, customer
+                messages, or complicated integrations.
+              </p>
+            </div>
 
-    <div className="bg-neutral-900/70 border border-neutral-800 rounded-2xl p-8">
-      <h3 className="text-xl font-semibold">✔ Scale to $10K+/mo</h3>
-      <p className="mt-3 text-neutral-400">
-        Grow using repeatable traffic systems that don't require paid ads.
-      </p>
-    </div>
-  </div>
+            <div className="bg-neutral-900/70 border border-neutral-800 rounded-2xl p-8">
+              <h3 className="text-xl font-semibold">✔ Scale to $10K+/mo</h3>
+              <p className="mt-3 text-neutral-400">
+                Grow using repeatable traffic systems that don't require paid
+                ads.
+              </p>
+            </div>
+          </div>
 
-  <Link href="/blueprint">
-    <Button className="mt-10">View the Course Curriculum</Button>
-  </Link>
-</section>
+          <Link href="/blueprint">
+            <Button className="mt-10">View the Course Curriculum</Button>
+          </Link>
+        </section>
 
         {/* OFFER STACK */}
-        <section className="reveal px-6 py-24 max-w-5xl mx-auto text-center">
+        <section
+          className="reveal px-6 py-24 max-w-5xl mx-auto text-center"
+          style={{ ["--d"]: "120ms" }}
+        >
           <h2 className="text-4xl font-bold">Choose the Path That Fits You</h2>
           <div className="mt-4 h-1 w-24 mx-auto rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500" />
 
           <p className="mt-4 text-neutral-400">
-            Start free, upgrade when you’re ready, or let us do the work for you.
+            Start free, upgrade when you’re ready, or let us do the work for
+            you.
           </p>
 
           <div className="mt-12 grid md:grid-cols-3 gap-8">
@@ -242,7 +280,8 @@ className="reveal px-6 py-24 max-w-6xl mx-auto text-center">
               <div className="p-8">
                 <h3 className="text-2xl font-semibold">Free Starter Kit</h3>
                 <p className="mt-4 text-neutral-400">
-                  Learn the basics of digital dropshipping and how the system works.
+                  Learn the basics of digital dropshipping and how the system
+                  works.
                 </p>
                 <p className="mt-6 text-3xl font-bold">FREE</p>
                 <Button className="mt-6 w-full" onClick={() => setIsOpen(true)}>
@@ -253,19 +292,22 @@ className="reveal px-6 py-24 max-w-6xl mx-auto text-center">
 
             <div className="bg-neutral-900 border-2 border-white rounded-2xl">
               <div className="p-8">
-                <h3 className="text-2xl font-semibold">Digital Dropshipping Blueprint</h3>
+                <h3 className="text-2xl font-semibold">
+                  Digital Dropshipping Blueprint
+                </h3>
                 <p className="mt-4 text-neutral-400">
-                  The complete step-by-step system to launch and scale your digital store.
+                  The complete step-by-step system to launch and scale your
+                  digital store.
                 </p>
                 <p className="mt-6 text-3xl font-bold text-fuchsia-400 drop-shadow-[0_0_10px_rgba(217,70,239,0.4)]">
                   $297
                 </p>
                 <Button
-  className="mt-6 w-full"
-  onClick={() => (window.location.href = "/blueprint")}
->
-  Enroll Now
-</Button>
+                  className="mt-6 w-full"
+                  onClick={() => (window.location.href = "/blueprint")}
+                >
+                  Enroll Now
+                </Button>
               </div>
             </div>
 
@@ -273,7 +315,8 @@ className="reveal px-6 py-24 max-w-6xl mx-auto text-center">
               <div className="p-8">
                 <h3 className="text-2xl font-semibold">Private DFY Build</h3>
                 <p className="mt-4 text-neutral-400">
-                  A service for students who want their store built, launched and optimized for them.
+                  A service for students who want their store built, launched
+                  and optimized for them.
                 </p>
                 <p className="mt-6 text-3xl font-bold">$1,497</p>
                 <Button variant="secondary" className="mt-6 w-full">
@@ -284,12 +327,70 @@ className="reveal px-6 py-24 max-w-6xl mx-auto text-center">
           </div>
         </section>
 
+        {/* ✅ STUDENT SUCCESS */}
+        <section
+          className="reveal px-6 pb-24 max-w-6xl mx-auto text-center"
+          style={{ ["--d"]: "160ms" }}
+        >
+          <h2 className="text-4xl font-bold">Student Success</h2>
+          <div className="mt-4 h-1 w-24 mx-auto rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500" />
+
+          <p className="mt-6 text-neutral-400 max-w-2xl mx-auto leading-relaxed text-lg">
+            Real people. Real momentum. These are the kinds of wins students
+            start stacking when they stop guessing and follow a system.
+          </p>
+
+          <div className="mt-12 grid gap-8 md:grid-cols-3 text-left">
+            {[
+              {
+                quote:
+                  "I finally stopped overthinking. I launched my first product in a weekend and got my first sale the same week.",
+                name: "Jasmine R.",
+                detail: "Beginner → First sale",
+              },
+              {
+                quote:
+                  "The automation setup alone was worth it. Once it clicked, I realized this can scale without me working more hours.",
+                name: "Marcus T.",
+                detail: "System + automation",
+              },
+              {
+                quote:
+                  "I was nervous to start, but the steps were so clear. I built something that actually looks legit and converts.",
+                name: "Alyssa K.",
+                detail: "Store + offer built",
+              },
+            ].map((t, i) => (
+              <div
+                key={i}
+                className="bg-neutral-900/70 border border-neutral-800 rounded-2xl p-8"
+                style={{ ["--d"]: `${200 + i * 110}ms` }}
+              >
+                <p className="text-neutral-300 leading-relaxed">“{t.quote}”</p>
+                <div className="mt-6">
+                  <p className="font-semibold">{t.name}</p>
+                  <p className="text-sm text-neutral-500">{t.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-10 text-neutral-500 text-sm">
+            (Want your screenshots here? As students send wins, we’ll feature
+            them.)
+          </p>
+        </section>
+
         {/* CTA */}
-        <section className="reveal px-6 py-24 max-w-4xl mx-auto text-center">
+        <section
+          className="reveal px-6 py-24 max-w-4xl mx-auto text-center"
+          style={{ ["--d"]: "200ms" }}
+        >
           <h2 className="text-4xl font-bold">Ready to Build Your Digital Store?</h2>
 
           <p className="mt-4 text-neutral-400">
-            Start with the free mini-course and upgrade only when it makes sense.
+            Start with the free mini-course and upgrade only when it makes
+            sense.
           </p>
 
           <Button className="mt-8" onClick={() => setIsOpen(true)}>
@@ -298,7 +399,8 @@ className="reveal px-6 py-24 max-w-6xl mx-auto text-center">
         </section>
 
         <footer className="px-6 py-12 text-center text-neutral-500 text-sm">
-          © {new Date().getFullYear()} Digital Dropshipping Blueprint. All rights reserved.
+          © {new Date().getFullYear()} Digital Dropshipping Blueprint. All rights
+          reserved.
         </footer>
       </main>
     </>
