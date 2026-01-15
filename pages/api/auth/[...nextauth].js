@@ -17,70 +17,84 @@ export const authOptions = {
       server: process.env.EMAIL_SERVER,
       from: process.env.EMAIL_FROM,
 
-      // ✅ THIS is what controls the email + removes "Sign in to www..."
       async sendVerificationRequest({ identifier, url, provider }) {
         const { server, from } = provider;
 
-        // transporter uses your EMAIL_SERVER (Resend SMTP)
         const transport = nodemailer.createTransport(server);
 
-        const host = "Digital Profit HQ";
-        const subject = `Sign in to ${host}`;
+        const brand = "Digital Profit HQ";
+        const host = new URL(url).host;
 
         const html = `
-          <div style="font-family:Arial,sans-serif;background:#000;padding:40px 16px;">
-            <div style="max-width:520px;margin:0 auto;background:#0b0b0b;border:1px solid #262626;border-radius:18px;padding:28px;text-align:center;">
-              <div style="letter-spacing:0.18em;font-size:12px;color:#a3a3a3;margin-bottom:14px;">
-                DIGITAL PROFIT HQ
-              </div>
+<!doctype html>
+<html>
+  <body style="margin:0;background:#0b0b0f;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:24px 12px;">
+      <tr>
+        <td align="center">
+          <table width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#111827;border:1px solid #1f2937;border-radius:18px;overflow:hidden;">
+            
+            <tr>
+              <td style="padding:22px 24px;background:linear-gradient(90deg,#d946ef,#ec4899);">
+                <div style="font-weight:800;color:#ffffff;font-size:16px;letter-spacing:.08em;text-transform:uppercase;">
+                  ${brand}
+                </div>
+              </td>
+            </tr>
 
-              <h1 style="color:#fff;margin:0 0 10px;font-size:28px;line-height:1.2;">
-                Sign in to Digital Profit HQ
-              </h1>
+            <tr>
+              <td style="padding:28px 24px 10px;color:#ffffff;">
+                <div style="font-size:22px;font-weight:800;margin:0 0 10px;">
+                  Sign in to ${brand}
+                </div>
+                <div style="color:#cbd5e1;font-size:14px;line-height:1.6;">
+                  Click the button below to securely sign in. This link expires shortly for your safety.
+                </div>
 
-              <p style="color:#a3a3a3;margin:0 0 22px;font-size:16px;line-height:1.6;">
-                Click the button below to securely sign in. This link expires shortly for your safety.
-              </p>
+                <div style="padding:18px 0 6px;">
+                  <a href="${url}"
+                     style="display:inline-block;background:linear-gradient(90deg,#d946ef,#ec4899);
+                            color:#ffffff !important;text-decoration:none;
+                            padding:14px 18px;border-radius:999px;
+                            font-weight:700;font-size:14px;">
+                    Sign in
+                  </a>
+                </div>
 
-              <a href="${url}"
-                style="
-                  display:inline-block;
-                  padding:14px 26px;
-                  border-radius:999px;
-                  background:linear-gradient(90deg,#d946ef,#ec4899);
-                  color:#ffffff !important;
-                  text-decoration:none;
-                  font-weight:700;
-                  font-size:16px;
-                ">
-                Sign in
-              </a>
+                <div style="color:#94a3b8;font-size:12px;line-height:1.6;margin-top:14px;">
+                  If the button doesn’t work, copy and paste this link into your browser:
+                </div>
 
-              <p style="color:#737373;margin:22px 0 8px;font-size:13px;line-height:1.5;">
-                If the button doesn’t work, copy and paste this link into your browser:
-              </p>
+                <div style="margin-top:8px;word-break:break-all;background:#0b1220;border:1px solid #1f2937;border-radius:12px;padding:12px;">
+                  <a href="${url}" style="color:#93c5fd;text-decoration:underline;font-size:12px;">
+                    ${url}
+                  </a>
+                </div>
 
-              <p style="word-break:break-all;margin:0;">
-                <a href="${url}" style="color:#60a5fa;text-decoration:underline;font-size:12px;">
-                  ${url}
-                </a>
-              </p>
+                <div style="color:#94a3b8;font-size:12px;line-height:1.6;margin-top:16px;">
+                  If you didn’t request this email, you can safely ignore it.
+                </div>
+              </td>
+            </tr>
 
-              <p style="color:#737373;margin-top:22px;font-size:12px;">
-                If you didn’t request this email, you can safely ignore it.
-              </p>
+            <tr>
+              <td style="padding:18px 24px 22px;color:#6b7280;font-size:12px;">
+                Sent to <span style="color:#9ca3af;">${identifier}</span> · ${host}<br/>
+                © ${new Date().getFullYear()} ${brand}
+              </td>
+            </tr>
 
-              <div style="margin-top:26px;color:#525252;font-size:12px;">
-                © ${new Date().getFullYear()} Digital Profit HQ
-              </div>
-            </div>
-          </div>
-        `;
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
 
         await transport.sendMail({
           to: identifier,
           from,
-          subject,
+          subject: `Your sign-in link for ${brand}`,
           html,
         });
       },
