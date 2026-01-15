@@ -344,7 +344,7 @@ export default function Home() {
             {[
               {
                 quote:
-                  "I finally stopped overthinking. I launched my first product in a weekend and got my first sale the same week.",
+                  "I launched my first product in a weekend and got my first sale the same week. Now I am doing 6,000 per month, all profit.",
                 name: "Jasmine R.",
                 detail: "Beginner → First sale",
               },
@@ -356,7 +356,7 @@ export default function Home() {
               },
               {
                 quote:
-                  "I was nervous to start, but the steps were so clear. I built something that actually looks legit and converts.",
+                  "I was nervous to start, but the steps were pretty clear. Now my business brings in $14,000/month passively.",
                 name: "Alyssa K.",
                 detail: "Store + offer built",
               },
